@@ -21,6 +21,20 @@ const SideBar = styled.div`
   padding: 160px 0px 0px 40px;
 `;
 
+const Row = styled.div`
+
+`;
+
+const Label = styled.div`
+
+`;
+
+const Value = styled.div`
+
+`;
+
+
+
 class App extends Component {
   render() {
     return (
@@ -29,7 +43,22 @@ class App extends Component {
 
         </Main>
         <SideBar>
-          <div> infotext</div>
+          <Row>
+            <Label>Words</Label>
+            <Value></Value>
+          </Row>
+          <Row>
+            <Label>Words excluding citations</Label>
+            <Value></Value>
+          </Row>
+          <Row>
+            <Label>Inline citations</Label>
+            <Value></Value>
+          </Row>
+          <Row>
+            <Label>Citations words</Label>
+            <Value></Value>
+          </Row>
         </SideBar>
       </Wrapper>
     );
