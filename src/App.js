@@ -22,6 +22,7 @@ const Main = styled.div`
 
 }
 `;
+
 const Container = styled.div`
   max-width: 800px;
   flex: 1;
@@ -100,6 +101,10 @@ class App extends Component {
     this.setState({ text: event.target.value });
   };
 
+  handleFocus (event) {
+    event.target.select();
+  };
+
   render() {
     const { text } = this.state;
     const citations = extractCitations(text) || [];
@@ -111,7 +116,7 @@ class App extends Component {
     const wordCountExlcudingCitations = totalWordCount - citationWordCount;
     const citationsCount = citations.length;
 
-    console.log('citaionts', extractCitations(text));
+    console.log('citations', extractCitations(text));
     return (
       <Wrapper>
         <Main>
@@ -123,6 +128,7 @@ class App extends Component {
               value={text}
               highlight={isCitation}
               onChange={this.onTextChangeHandler}
+              onFocus={this.handleFocus}
             />
           </Container>
         </Main>
@@ -154,8 +160,20 @@ class App extends Component {
         </SideBar>
         <MobileFooter>
           <Row>
+            <Label>Inline citations</Label>
+            <Value>{citationsCount}</Value>
+          </Row>
+          <Row>
+            <Label>Words including citations</Label>
+            <Value>{totalWordCount.toLocaleString()}</Value>
+          </Row>
+          <Row>
             <Label>Words excluding citations</Label>
             <Value>{wordCountExlcudingCitations.toLocaleString()}</Value>
+          </Row>
+          <Row>
+            <Label>Words for citations</Label>
+            <Value>{citationWordCount}</Value>
           </Row>
         </MobileFooter>
       </Wrapper>
