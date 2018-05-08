@@ -60,6 +60,7 @@ const Footer = styled.div`
 
 const MobileFooter = styled.div`
   position: relative;
+  top: 100%;
   background-color: #f8f8f8;
   border-top: 1px solid #eee;
   display: none;
