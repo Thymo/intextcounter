@@ -19,7 +19,6 @@ const Main = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 40px;
-  height: 100%;
 }
 `;
 
