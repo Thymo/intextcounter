@@ -23,6 +23,7 @@ body {
   background: white;
   width: 100%;
   flex: 1;
+  min-height: 250px;
 }
 
 .rth-backdrop {
