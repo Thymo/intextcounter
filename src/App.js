@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 import styled from 'styled-components';
@@ -8,13 +7,26 @@ import TextAreaHighlight from './ReactTextareaHighlight';
 const Wrapper = styled.div`
   height: 100vh;
   display: flex;
-  color: #333;
   font-size: 15px;
 `;
 
 const Main = styled.div`
   flex: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+
+}
 `;
+const Container = styled.div`
+  max-width: 800px;
+  flex: 1;
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+`;
+const Title = styled.h1``;
 
 const SideBar = styled.div`
   flex: 1;
@@ -22,7 +34,9 @@ const SideBar = styled.div`
   min-width: 250px;
   background-color: #f8f8f8;
   border-left: 1px solid #eee;
-  padding: 160px 30px 0px 40px;
+  padding: 150px 30px 30px 40px;
+  display: flex;
+  flex-direction: column;
 
   @media (max-width: 600px) {
     width: 100%;
@@ -30,58 +44,98 @@ const SideBar = styled.div`
   }
 `;
 
+const Body = styled.div`
+  flex: 1;
+`;
+
+const Footer = styled.div`
+  color: #aaa;
+`;
+
 const Row = styled.div`
-  padding: 5px;
-  margin-bottom: 20px;
+  padding: 15px 0px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const Label = styled.span`
-  float: left;
-  margin-right: 20px;
+  color: black;
+  font-weight: 500;
 `;
 
 const Value = styled.span`
-  background: white;
-  padding: 3px 10px;
-  border: 1px solid #dc143c;
+  ${'' /* background: white; */} padding: 3px 10px;
   float: right;
 `;
 
-const TextArea = styled(TextAreaHighlight)`
-  width: 960px;
-`;
+const citationPattern = /\([^)]*?, \d{4}\)/gm;
+const isCitation = () => citationPattern;
 
-const isCitation = () => /\([^)]*?, \d{4}\)/gm;
+const extractCitations = text => text.match(citationPattern);
+const countWords = text => (text.match(/\S+/g) || []).length;
 
 class App extends Component {
+  state = {
+    text: 'Paste your text here to count the words (Example et al., 2018).'
+  };
+
+  onTextChangeHandler = event => {
+    this.setState({ text: event.target.value });
+  };
+
   render() {
+    const { text } = this.state;
+    const citations = extractCitations(text) || [];
+    const totalWordCount = countWords(text);
+    const citationWordCount = citations.reduce(
+      (acc, citation) => (acc += countWords(citation)),
+      0
+    );
+    const wordCountExlcudingCitations = totalWordCount - citationWordCount;
+    const citationsCount = citations.length;
+
+    console.log('citaionts', extractCitations(text));
     return (
       <Wrapper>
         <Main>
-          <TextAreaHighlight
-            value="The resolution of multi material printing is based on the printing technology a printer uses. Filament Deposition Modeling for instance has a resolution limit of around 20 micrometers whilst stereolithography has a resolution limit of only a couple micrometers (Jin et al., 2009; Sun et al, 2005). The largest resolution has fundamentally no limit but in practice itis a few centimeters. Materials pose a limit, too, as their flexibility and melting temperature completely determine the printability of an object. (Campbell et al., 2011). Multi-material printing can be used in different ways (i.e. clinical, electronic and industrial), though it will not be practical to all applications (University of Nottingham, 2017). For example,  even though food can be printed, it remains cheaper to cook it  (Chu, 2017).
-            3D-Functional Material Printing"
-            className="censor"
-            highlight={isCitation}
-          />
+          <Container>
+            <Title>
+              Intextcounter: a smart word counter for Technology Managment
+            </Title>
+            <TextAreaHighlight
+              value={text}
+              highlight={isCitation}
+              onChange={this.onTextChangeHandler}
+            />
+          </Container>
         </Main>
         <SideBar>
-          <Row>
-            <Label>Words</Label>
-            <Value>x</Value>
-          </Row>
-          <Row>
-            <Label>Words excluding citations</Label>
-            <Value>y</Value>
-          </Row>
-          <Row>
-            <Label>Inline citations</Label>
-            <Value>z</Value>
-          </Row>
-          <Row>
-            <Label>Citations words</Label>
-            <Value>a</Value>
-          </Row>
+          <Body>
+            <Row>
+              <Label>Inline citations</Label>
+              <Value>{citationsCount}</Value>
+            </Row>
+            <Row>
+              <Label>Words including citations</Label>
+              <Value>{totalWordCount.toLocaleString()}</Value>
+            </Row>
+            <Row>
+              <Label>Words excluding citations</Label>
+              <Value>{wordCountExlcudingCitations.toLocaleString()}</Value>
+            </Row>
+            <Row>
+              <Label>Words for citations</Label>
+              <Value>{citationWordCount}</Value>
+            </Row>
+          </Body>
+          <Footer>
+            Handcrafted with ❤️by{' '}
+            <a href="https://www.linkedin.com/in/maxrijnierse">Max</a>,{' '}
+            <a href="https://www.facebook.com/nathan.houtsma.7">Nathan</a> &{' '}
+            <a href="https://www.linkedin.com/in/thymoterdoest">Thymo</a>
+          </Footer>
         </SideBar>
       </Wrapper>
     );

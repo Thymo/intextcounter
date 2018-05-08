@@ -2,11 +2,17 @@
   -webkit-font-smoothing: antialiased;
 }
 
+html {
+  height: 100vh;
+}
+
 body {
   margin: 0;
   padding: 0;
+  color: rgb(51, 51, 51);
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Helvetica Neue, Helvetica, Arial, sans-serif;
+  height: 100vh;
 }
 
 .rth-container {
@@ -15,6 +21,8 @@ body {
   overflow: hidden !important;
   -webkit-text-size-adjust: none !important;
   background: white;
+  width: 100%;
+  flex: 1;
 }
 
 .rth-backdrop {
@@ -26,6 +34,7 @@ body {
   padding-right: 99px !important;
   overflow-x: hidden !important;
   overflow-y: auto !important;
+  width: 100%;
 }
 
 .rth-highlights {
@@ -34,7 +43,6 @@ body {
   border-color: transparent !important;
   white-space: pre-wrap !important;
   word-wrap: break-word !important;
-  color: transparent !important;
   overflow: hidden !important;
 }
 
@@ -48,16 +56,25 @@ body {
   overflow-x: hidden !important;
   overflow-y: auto !important;
   outline: none;
+  color: transparent !important;
+  width: 100%;
+  height: 100%;
+  resize: none;
+}
+
+.rth-input::-webkit-scrollbar {
+  display: none;
 }
 
 .rth-content {
-  line-height: 26px;
-  font-size: 16px;
+  line-height: 36px;
+  font-size: 18px;
   font-weight: 400;
   border: none;
   background: none transparent !important;
 }
 
 .rth-content mark {
-  background-color: #c84243;
+  color: #4a90e2;
+  background-color: #edf4fc;
 }

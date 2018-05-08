@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Intextcounter",
+  "name": "Intextcounter: the smart word counter for Technology Managment",
   "icons": [
     {
       "src": "favicon.ico",
