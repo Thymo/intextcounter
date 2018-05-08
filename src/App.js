@@ -8,6 +8,9 @@ const Wrapper = styled.div`
   height: 100vh;
   display: flex;
   font-size: 15px;
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
 `;
 
 const Main = styled.div`
@@ -25,6 +28,9 @@ const Container = styled.div`
   padding-top: 80px;
   display: flex;
   flex-direction: column;
+  @media (max-width: 600px) {
+    padding-top: 0px;
+  }
 `;
 const Title = styled.h1``;
 
@@ -39,8 +45,7 @@ const SideBar = styled.div`
   flex-direction: column;
 
   @media (max-width: 600px) {
-    width: 100%;
-    max-width: 100%;
+    display: none;
   }
 `;
 
@@ -50,6 +55,16 @@ const Body = styled.div`
 
 const Footer = styled.div`
   color: #aaa;
+`;
+
+const MobileFooter = styled.div`
+  background-color: #f8f8f8;
+  border-top: 1px solid #eee;
+  display: none;
+  padding: 0px 40px;
+  @media (max-width: 600px) {
+    display: block;
+  }
 `;
 
 const Row = styled.div`
@@ -137,6 +152,12 @@ class App extends Component {
             <a href="https://www.linkedin.com/in/thymoterdoest">Thymo</a>
           </Footer>
         </SideBar>
+        <MobileFooter>
+          <Row>
+            <Label>Words excluding citations</Label>
+            <Value>{wordCountExlcudingCitations.toLocaleString()}</Value>
+          </Row>
+        </MobileFooter>
       </Wrapper>
     );
   }
