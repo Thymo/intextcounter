@@ -102,9 +102,9 @@ class App extends Component {
     this.setState({ text: event.target.value });
   };
 
-  handleFocus (event) {
+  handleFocus(event) {
     event.target.select();
-  };
+  }
 
   render() {
     const { text } = this.state;
@@ -117,13 +117,12 @@ class App extends Component {
     const wordCountExlcudingCitations = totalWordCount - citationWordCount;
     const citationsCount = citations.length;
 
-    console.log('citations', extractCitations(text));
     return (
       <Wrapper>
         <Main>
           <Container>
             <Title>
-              Intextcounter: a smart word counter for Technology Managment
+              Intextcounter: a smart word counter for Technology Management
             </Title>
             <TextAreaHighlight
               value={text}
