@@ -87,7 +87,7 @@ const Value = styled.span`
   float: right;
 `;
 
-const citationPattern = /\([^)]*?, \d{4}\)/gm;
+const citationPattern = /\([^)]*?, ((\d{4})|(n\.d\.))\)/gm;
 const isCitation = () => citationPattern;
 
 const extractCitations = text => text.match(citationPattern);
